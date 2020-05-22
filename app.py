@@ -16,8 +16,11 @@ app = Flask(__name__)
 def hello():
     return render_template('base.html')
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register_user():
+    if request.method == 'POST':
+        users = mongo.db.users
+        users.find_one({'username': request.form['username']})
     return render_template('register.html')
 
 
@@ -30,4 +33,3 @@ if __name__ == '__main__':
     app.run(host=os.environ.get('IP', '0.0.0.0'),
     port=int(os.environ.get('PORT', '5000')),
     debug=True)
-
