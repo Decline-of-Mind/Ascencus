@@ -1,27 +1,22 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
   <div class="row">
-    <form class="col s12">
+    <form action="{{ url_for('register') }}" class="col s12" method="POST">
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">account_circle</i>
           <input id="icon_prefix" name="username" type="text" class="validate" />
-          <label for="icon_prefix">First Name</label>
+          <label for="icon_prefix">Username</label>
         </div>
         <div class="input-field col s12">
           <i class="material-icons prefix">account_circle</i>
-          <input id="icon_prefix" type="text" class="validate" />
-          <label for="icon_prefix">Last Name</label>
+          <input id="passwordline" name="password"  type="password" class="validate" />
+          <label for="password">Password</label>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
-          <i class="material-icons prefix">email</i>
-          <input id="icon_email" type="tel" class="validate" />
-          <label for="icon_email">email</label>
-        </div>
+      <a class="waves-effect waves-light btn-large" type="submit" value="submit">Button</a>
       </div>
-      <a class="waves-effect waves-light btn-large">Button</a>
     </form>
   </div>
 </div>
