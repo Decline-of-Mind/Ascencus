@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Piedra&display=swap');
+
 .sidenav-trigger  {
     z-index: 18;
     position: absolute;
@@ -19,8 +21,17 @@
     position: relative;
     top: 0;
     left: 0;
-    z-index: 1;
     height: 800;
     width: 100vw;
+    background: transparent;
 }
 
+.slider .slides li .caption .slidetitle {
+    font-family: 'Fredoka', sans-serif !important; 
+    font-weight: 700;
+}
+
+.slider .slides li .caption .slidetext {
+    font-family: 'Piedra', sans-serif !important;
+    font-weight: 500;
+}
