@@ -1,0 +1,26 @@
+.sidenav-trigger  {
+    z-index: 18;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.navmenu {
+    z-index: 20px;
+    position: absolute;
+    border: 10px;
+    top: 15px;
+    left: 15px;
+    border-radius: 7rem;
+
+}
+
+.slider {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    height: 800;
+    width: 100vw;
+}
+
