@@ -17,7 +17,7 @@
   </head>
   <body>
 
-    <div class="slider">
+    <div id="slider" class="slider">
     <ul class="slides">
       <li>
         <img src="../static/images/clouds.jpg"> <!-- random image -->
@@ -27,7 +27,7 @@
         </div>
       </li>
       <li>
-        <img src="../static/images/clouds.jpg"> <!-- random image -->
+        <img src="../static/images/steppe3.jpg"> <!-- random image -->
         <div class="caption left-align">
           <h3 class="slidetitle">Inspiring Movies</h3>
           <h5 class="light grey-text text-lighten-3 slidetext">Find out which movies are valued for their Meaning and Power!</h5>
@@ -72,7 +72,7 @@
       <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
     </ul>
     <a href="#" data-target="slide-out" class="sidenav-trigger"
-      ><i class="large material-icons navmenu white-text black">menu</i></a>
+      ><i id="menuicon" class="small material-icons navmenu white-text black">menu</i></a>
 
     
     {% block content %} {% endblock %}
@@ -82,6 +82,18 @@
    <script> $(document).ready(function(){
     $('.sidenav').sidenav();
     $('.slider').slider();
+        });
+    </script>
+    <script>
+    $(window).resize(function(){     
+
+       if ($('#slider').width() >= 520 ){
+            $('#menuicon').removeClass('small').addClass('large')
+       }
+       else ($(#'slider').width() =< 520 ) {
+            $('#menuicon').removeClass('large').addClass('small')
+       }
+
     });
   </script>
 </html>
