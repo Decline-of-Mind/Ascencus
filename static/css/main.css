@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Piedra&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Piedra&display=swap|Exo:300,400,500,600,700');
 
 .sidenav-trigger  {
     z-index: 18;
@@ -19,17 +19,27 @@
     position: relative;
     top: 0;
     left: 0;
-    height: 800;
+    height: 20vh;
     width: 100vw;
     background: transparent;
 }
 
+
 .slider .slides li .caption h3  {
     font-family: 'Piedra', sans-serif !important; 
     font-weight: 700;
+    color: #0d47a1 !important;
 }
 
 .slider .slides li .caption .slidetext {
     font-family: 'Piedra', sans-serif !important;
-    font-weight: 500;
+    font-weight: 700;
+    font-size:  20px;
+    color: #0d47a1 !important;
+}
+
+@media only screen and (max-width: 560px) {
+  .slides {
+      height: 20vh;
+  }
 }

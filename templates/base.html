@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/main.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
@@ -16,41 +16,52 @@
     />
   </head>
   <body>
-
     <div id="slider" class="slider">
-    <ul class="slides">
-      <li>
-        <img src="../static/images/clouds.jpg"> <!-- random image -->
-        <div class="caption center-align">
-          <h3 class="slidetitle">Ascension</h3>
-          <h5 class="light grey-text text-lighten-3 slidetext">A Collection of Philosophy and Spirituality </h5>
-        </div>
-      </li>
-      <li>
-        <img src="../static/images/steppe3.jpg"> <!-- random image -->
-        <div class="caption left-align">
-          <h3 class="slidetitle">Inspiring Movies</h3>
-          <h5 class="light grey-text text-lighten-3 slidetext">Find out which movies are valued for their Meaning and Power!</h5>
-        </div>
-      </li>
-      <li>
-        <img src="../static/images/clouds.jpg"> <!-- random image -->
-        <div class="caption right-align">
-          <h3 class="slidetitle">Powerful Books</h3>
-          <h5 class="light grey-text text-lighten-3 slidetext">Engulf yourself in the Knowledge and Wisdom recommended by others!</h5>
-        </div>
-      </li>
-      <li>
-        <img src="../static/images/clouds.jpg"> <!-- random image -->
-        <div class="caption center-align">
-          <h3 class="slidetitle">Add your own!</h3>
-          <h5 class="light grey-text text-lighten-3 slidetext">Share the books or movies you wish other people would see!</h5>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-      <ul id="slide-out" class="sidenav">
+      <ul class="slides">
+        <li>
+          <img src="../static/images/stairs.jpg" />
+          <!-- random image -->
+          <div class="caption center-align">
+            <h3 class="slidetitle">Ascension</h3>
+            <h5 class="light grey-text text-lighten-3 slidetext">
+              A Collection of Philosophy and Spirituality
+            </h5>
+          </div>
+        </li>
+        <li>
+          <img src="../static/images/hill.jpg" />
+          <!-- random image -->
+          <div class="caption left-align">
+            <h3 class="slidetitle">Inspiring Movies</h3>
+            <h5 class="light grey-text text-lighten-3 slidetext">
+              Find out which movies are valued for their Meaning and Power!
+            </h5>
+          </div>
+        </li>
+        <li>
+          <img src="../static/images/bookchild.jpg" />
+          <!-- random image -->
+          <div class="caption right-align">
+            <h3 class="slidetitle">Powerful Books</h3>
+            <h5 class="light grey-text text-lighten-3 slidetext">
+              Engulf yourself in the Knowledge and Wisdom recommended by others!
+            </h5>
+          </div>
+        </li>
+        <li>
+          <img src="../static/images/give.jpg" />
+          <!-- random image -->
+          <div class="caption center-align">
+            <h3 class="slidetitle">Add your own!</h3>
+            <h5 class="light grey-text text-lighten-3 slidetext">
+              Share the books or movies you wish other people would see!
+            </h5>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- NAVBAR -->
+    <ul id="slide-out" class="sidenav">
       <li>
         <div class="user-view">
           <div class="background">
@@ -71,21 +82,28 @@
       <li><a class="subheader">Subheader</a></li>
       <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
     </ul>
-    <a href="#" data-target="slide-out" class="sidenav-trigger"
-      ><i id="menuicon" class="small material-icons navmenu white-text black">menu</i></a>
+    <a href="#" data-target="slide-out" class="sidenav-trigger">
+      <i id="menuicon" class="small material-icons navmenu white-text black"
+        >menu</i
+      >
+    </a>
 
-    
     {% block content %} {% endblock %}
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
-   <script> $(document).ready(function(){
-    $('.sidenav').sidenav();
-    $('.slider').slider();
-        });
-    </script>
-    <script>
-    $(window).resize(function(){     
+  <script>
+    $(document).ready(function () {
+      $(".sidenav").sidenav();
+      $(".slider").slider({
+        full_width: true,
+        height: 300, // default - height : 400
+        interval: 8000, // default - interval: 6000
+      });
+    });
+  </script>
+  <script>
+    $(window).resize(function(){
 
        if ($('#slider').width() >= 520 ){
             $('#menuicon').removeClass('small').addClass('large')
