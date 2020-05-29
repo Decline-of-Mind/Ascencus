@@ -21,14 +21,11 @@ app.config['MONGO_DBS'] = DBS_NAME
 
 mongo= PyMongo(app)
 
-user = mongo.db.users.find_one({"username": "Didlydoo"})
-print("*** USER ****")
-print(user)
-print("**************")
 
 @app.route('/')
+@app.route("/index")
 def index():
-    return render_template('index.html')
+    return render_template('index.html', movies=mongo.db.movies.find(), books=mongo.db.books.find())
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP', '0.0.0.0'),

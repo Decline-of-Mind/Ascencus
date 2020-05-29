@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Piedra&display=swap|Exo:300,400,500,600,700');
 
+/* Base.html */
 .sidenav-trigger  {
     z-index: 18;
     position: absolute;
@@ -36,6 +37,20 @@
     font-weight: 700;
     font-size:  20px;
     color: #0d47a1 !important;
+}
+
+
+/* Index.html */
+.card {
+    border-radius: 15px !important;
+}
+
+.card-img-top{
+    justify-content: center;
+    width: 20rem;
+    height: 300px;
+    border-radius: 15px
+    
 }
 
 @media only screen and (max-width: 560px) {
