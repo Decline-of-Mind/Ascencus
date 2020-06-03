@@ -1,0 +1,15 @@
+{% extends 'add_layout.html'%} {% block content %}
+
+<div class="add_container">
+    <div class="row">
+        <div class="col 5">
+            <img src="{{ book.img_url }}" alt="image of bookcover">
+        </div>
+        <div class="col 7">
+            <h2>{{ book.title }}</h2>
+        </div>
+    </div>
+</div>
+
+    
+{% endblock %}

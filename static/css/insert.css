@@ -1,0 +1,16 @@
+body {
+    background: url('../images/clouds.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.add_container {
+    margin-top: 40px !important;
+    background-color: aliceblue;
+    height: 600px;
+    /* width: 50vw; */
+}
+
+.addform {
+    background-color: aliceblue;
+}

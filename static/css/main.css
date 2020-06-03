@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Piedra&display=swap|Exo:300,400,500,600,700');
 
 /* Base.html */
+body {
+    background-color: #424242;
+}
+
 .sidenav-trigger  {
     z-index: 18;
     position: absolute;
@@ -40,17 +44,21 @@
 }
 
 .button-row {
-    margin-top: 20px;
-    margin-left: 0 !important;
+    height: 55px;
+    background-color: #212121;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left:  0 !important;
     margin-right: 0 !important;
 }
 
 
-/* Index.html */
+/* CARDS FOR BOOKS AND MOVIES ON INDEX */
 .card {
+    color:#0d47a1;
     font-family: 'Piedra', sans-serif;
     border-radius: 15px !important;
-    background-color: #424242 !important;
+    background-color: #212121 !important;
 }
 
 .card-title {
@@ -80,6 +88,8 @@
     font-family: 'Piedra', sans-serif;
     color: black;
 }
+ /* CONTENT */
+
 
 @media only screen and (max-width: 560px) {
   .slides {
