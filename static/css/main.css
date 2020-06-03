@@ -39,10 +39,22 @@
     color: #0d47a1 !important;
 }
 
+.button-row {
+    margin-top: 20px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
 
 /* Index.html */
 .card {
+    font-family: 'Piedra', sans-serif;
     border-radius: 15px !important;
+    background-color: #424242 !important;
+}
+
+.card-title {
+    font-family: 'Piedra', sans-serif;
 }
 
 .card-img-top{
@@ -51,6 +63,22 @@
     height: 300px;
     border-radius: 15px
     
+}
+.card-body {
+    padding-left: 5px;
+}
+
+.card-separate {
+    height: 2.5px;
+    background-color: #0d47a1;
+}
+
+.list-group-item {
+    font-size: 16px !important;
+}
+.card-link {
+    font-family: 'Piedra', sans-serif;
+    color: black;
 }
 
 @media only screen and (max-width: 560px) {

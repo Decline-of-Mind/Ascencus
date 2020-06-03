@@ -61,33 +61,47 @@
       </ul>
     </div>
     <!-- NAVBAR -->
+    <!-- TO BE USED AS LOGIN/USER MENU WHEN FUNCTION IS ADDED -->
     <ul id="slide-out" class="sidenav">
       <li>
         <div class="user-view">
           <div class="background">
-            <img src="images/office.jpg" />
+            <img src="../static/images/color-pallete.jpg" />
           </div>
-          <a href="#user"><img class="circle" src="images/yuna.jpg" /></a>
-          <a href="#name"><span class="white-text name">John Doe</span></a>
+          <a href="#user"><img class="circle" src="../static/images/little_buddhist.jpg" /></a>
+          <a href="#name"><span class="white-text name"></span></a>
           <a href="#email"
-            ><span class="white-text email">jdandturk@gmail.com</span></a
+            ><span class="white-text email"></span></a
           >
         </div>
       </li>
       <li>
-        <a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a>
+        <a href="#!"><i class="material-icons">book</i>Add a Book!</a>
       </li>
-      <li><a href="#!">Second Link</a></li>
+      <li><a href="#!"><i class="material-icons">computer</i>Add a Movie!</a></li>
       <li><div class="divider"></div></li>
-      <li><a class="subheader">Subheader</a></li>
+      <li><a class="subheader">Additional actions</a></li>
+      <li><a class="waves-effect" href="#!">Update Content</a></li>
+      <li><a class="waves-effect" href="#!">Delete Content</a></li>
       <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
     </ul>
     <a href="#" data-target="slide-out" class="sidenav-trigger">
       <i id="menuicon" class="small material-icons navmenu white-text black"
-        >menu</i
+        >home</i
       >
     </a>
-
+    <div class="row button-row">
+      <div class="col 6">
+        <a href="{{url_for('get_books')}}"  class="waves-effect waves-light btn"
+          ><i class="material-icons left">book</i>Books</a
+        >
+      </div>
+      <div class="col 6">
+        <a href="{{url_for('get_movies')}}" class="waves-effect waves-light btn"
+          ><i class="material-icons left">computer</i>Movies</a
+        >
+      </div>
+    </div>
     {% block content %} {% endblock %}
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

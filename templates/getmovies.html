@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+  {% for movie in movies %}
+  <div class="col 12">
+    <div class="card" style="width: 20rem;">
+      <img
+        class="card-img-top"
+        src="{{ movie.img_url }}"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title"><strong>{{ movie.title.title()}}</strong></h5>
+        <p class="card-text">
+          {{movie.small_description}}
+        </p>
+      </div>
+      <ul class="list-group list-group-flush">
+      <div class="card-separate"></div>
+        <li class="list-group-item hoverable"><i class="material-icons left">person</i><strong> Director: </strong>{{movie.director.title()}} </li>
+        <div class="card-separate"></div>
+        <li class="list-group-item hoverable"><i class="material-icons left">wb_sunny</i><strong>Category: </strong>{{movie.category.capitalize()}} </li>
+        <div class="card-separate"></div>
+      </ul>
+      <div class="card-body hoverable">
+        <a href="#" class="card-link"><i class="material-icons left">keyboard_arrow_right</i>More information</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

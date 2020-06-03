@@ -5,9 +5,10 @@ from os import path
 if path.exists('env.py'):
     import env
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for
 import pymongo
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 
 ''' Initializes Flask application '''
 app = Flask(__name__)
@@ -23,9 +24,24 @@ mongo= PyMongo(app)
 
 
 @app.route('/')
-@app.route("/index")
 def index():
-    return render_template('index.html', movies=mongo.db.movies.find(), books=mongo.db.books.find())
+    return render_template('base.html', movies=mongo.db.movies.find())
+
+@app.route('/getmovies')
+def get_movies():
+    return render_template('getmovies.html', movies=mongo.db.movies.find())
+
+@app.route('/getbooks')
+def get_books():
+    return render_template('getbooks.html', books=mongo.db.books.find())
+
+@app.route('/addbook',  methods=['POST'])
+def add_book():
+    book = mongo.db.books
+    book.insert_one(request.form.to_dict())
+    print(request.form.to_dict())
+    return redirect(url_for('get_books'))
+
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP', '0.0.0.0'),
