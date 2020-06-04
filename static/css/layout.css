@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Piedra&display=swap|Exo:300,400,500,600,700');
+ 
+ /* nav-menu */
+.sidenav-trigger  {
+    z-index: 18;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.navmenu {
+    z-index: 20px;
+    position: absolute;
+    border: 10px;
+    border-radius: 7rem;
+
+}
+
+
+body {
+    background: url('../images/clouds.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.add_container {
+    margin-top: 40px !important;
+    background-color: aliceblue;
+    height: 600px;
+    /* width: 50vw; */
+}
+
+.addform {
+    background-color: aliceblue;
+}
+
+.full_image {
+    height: 350px;
+}
+
+.full_title {
+    font-family: 'Piedra', sans-serif;
+    font-weight: 700;
+}
+.auth_direct {
+    font-weight: 500;
+    font-size: 30px;
+    font-family: 'Piedra', sans-serif;
+}
+.full_category {
+    font-weight: 500;
+    font-size: 30px;
+    font-family: 'Piedra', sans-serif;
+}
+
+.full_description {
+    font-family: 'Piedra', sans-serif;
+    font-size: 18px;
+}
+
+.comment_p {
+    font-family: 'Piedra', sans-serif;
+    font-size: 18px;
+}
+
+
+
+
+@media only screen and (max-width: 560px) {
+    .full_image {
+        max_width: 
+    }

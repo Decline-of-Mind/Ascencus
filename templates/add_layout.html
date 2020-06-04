@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Content</title>
-    <link rel="stylesheet" href="../static/css/insert.css" />
+    <link rel="stylesheet" href="../static/css/layout.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
@@ -15,9 +15,42 @@
     />
 </head>
 <body>
+  <ul id="slide-out" class="sidenav">
+      <li>
+        <div class="user-view">
+          <div class="background">
+            <img src="../static/images/color-pallete.jpg" />
+          </div>
+          <a href="#user"><img class="circle" src="../static/images/little_buddhist.jpg" /></a>
+          <a href="#name"><span class="white-text name"></span></a>
+          <a href="#email"
+            ><span class="white-text email"></span></a
+          >
+        </div>
+      </li>
+      <li>
+        <a href="/"><i class="material-icons">home</i>Go back to main page</a>
+      </li>
+      <li><div class="divider"></div></li>
+      <li><a class="subheader">Additional actions</a></li>
+      <li><a href="#!"><i class="material-icons">book</i>Add a Book!</a></li>
+      <li><a href="#!"><i class="material-icons">computer</i>Add a Movie!</a></li>
+    
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger">
+      <i id="menuicon" class="small material-icons navmenu white-text black"
+        >home</i
+      >
+    </a>
     {% block content %} 
     {% endblock %}
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
+<script>
+$(document).ready(function () {
+      $(".sidenav").sidenav();
+});
+</script>
+
 </html>

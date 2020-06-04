@@ -1,15 +1,30 @@
 {% extends 'add_layout.html'%} {% block content %}
 
-<div class="add_container">
-    <div class="row">
-        <div class="col 5">
-            <img src="{{ book.img_url }}" alt="image of bookcover">
-        </div>
-        <div class="col 7">
-            <h2>{{ book.title }}</h2>
-        </div>
+<div>
+  <div class="row">
+    <div class="col 5">
+      <img
+        class="full_image"
+        src="{{ book.img_url }}"
+        alt="image of bookcover"
+      />
     </div>
+    <div class="col 7">
+      <h3 class="full_title">{{ book.title }}</h3>
+      <p class ="auth_direct"> <i class="material-icons medium left">person</i> {{book.author}} </p>
+      <p class= "full_category"><i class="material-icons medium left">wb_sunny</i> {{book.category.capitalize()}} </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col 7">
+      <p class="full_description">{{book.description}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col 12"><p class="comment_p"><i class="material-icons medium left">message</i>{{book.first_comment}}</p></div>
+    <div class="col 12"><p class="comment_p"><i class="material-icons medium left">message</i>{{book.second_comment}}</p></div>
+    <div class="col 12"><p class="comment_p"><i class="material-icons medium left">message</i>{{book.third_comment}}</p></div>
+  </div>
 </div>
 
-    
 {% endblock %}
