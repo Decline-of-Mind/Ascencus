@@ -21,7 +21,8 @@ body {
     background: url('../images/clouds.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    font-family: 'Piedra', sans-serif;
+    height: 1700px;
 }
 
 .add_container {
@@ -40,34 +41,29 @@ body {
 }
 
 .full_title {
-    font-family: 'Piedra', sans-serif;
     font-weight: 700;
 }
 .auth_direct {
     font-weight: 500;
     font-size: 30px;
-    font-family: 'Piedra', sans-serif;
 }
 .full_category {
     font-weight: 500;
     font-size: 30px;
-    font-family: 'Piedra', sans-serif;
+    
 }
 
 .full_description {
-    font-family: 'Piedra', sans-serif;
-    font-size: 18px;
+    font-size: 25px;
 }
 
 .comment_p {
-    font-family: 'Piedra', sans-serif;
     font-size: 18px;
 }
-
 
 
 
 @media only screen and (max-width: 560px) {
-    .full_image {
+    body {
         max_width: 
     }

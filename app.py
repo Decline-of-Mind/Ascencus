@@ -37,7 +37,8 @@ def get_books():
 
 @app.route('/full_movie/<movie_id>')
 def full_movie(movie_id):
-    return''
+    this_movie = mongo.db.movies.find_one({'_id': ObjectId(movie_id)})
+    return render_template('full_movie.html', movie = this_movie)
 
 @app.route('/full_book/<book_id>')
 def full_book(book_id):

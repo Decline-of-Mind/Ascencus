@@ -1,5 +1,41 @@
 {% extends 'add_layout.html'%} {% block content %}
 
+<div>
+  <div class="row">
+    <div class="col 5">
+      <img
+        class="full_image"
+        src="{{ movie.img_url }}"
+        alt="image of bookcover"
+      />
+    </div>
+    <div class="col 7">
+      <h3 class="full_title">{{ movie.title }}</h3>
+      <p class="auth_direct">
+        <i class="material-icons medium left">person</i>
+        {{movie.director.capitalize()}}
+      </p>
+      <p class="full_category">
+        <i class="material-icons medium left">wb_sunny</i>
+        {{movie.category.capitalize()}}
+      </p>
+      <p class="full_category">
+        <i class="material-icons medium left">access_time</i> {{movie.runtime}}
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col 7">
+      <h4>Short Description</h4>
+      <p class="full_description">{{movie.small_description}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col 12">
+    <h2>Full description</h2>
+      <p class="full_description">{{movie.big_description}}</p>
+    </div>
+  </div>
+</div>
 
-    
-{% end block %}
+{% endblock %}
