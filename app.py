@@ -55,14 +55,15 @@ def add_movie():
 
 @app.route('/addbook', methods=['GET', 'POST'])
 def add_book():
-    return render_template('addbook.html')
+    return render_template('addbook.html',
+    book=mongo.db.books.find())
 
 @app.route('/insert_book', methods=['POST'])
 def insert_book():
-    books = mongo.db.books
-    books.insert_one(request.form.to_dict())
+    book = mongo.db.books
+    book.insert_one(request.form.to_dict())
     print(request.form.to_dict())
-    return redirect(url_for('full_book'))
+    return redirect(url_for('full_book/<book_id>' ))
 
 
 

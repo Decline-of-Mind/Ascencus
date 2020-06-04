@@ -10,7 +10,7 @@
       />
     </div>
     <div class="col 7">
-      <h3 class="full_title">{{ movie.title }}</h3>
+      <h3 class="full_title">{{ movie.title.title() }}</h3>
       <p class="auth_direct">
         <i class="material-icons medium left">person</i>
         {{movie.director.capitalize()}}
@@ -32,7 +32,7 @@
   </div>
   <div class="row">
     <div class="col 12">
-    <h2>Full description</h2>
+      <h2>Full description</h2>
       <p class="full_description">{{movie.big_description}}</p>
     </div>
   </div>

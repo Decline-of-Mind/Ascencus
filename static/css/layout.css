@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Piedra&display=swap|Exo:300,400,500,600,700');
- 
+
  /* nav-menu */
 .sidenav-trigger  {
     z-index: 18;
@@ -16,24 +16,24 @@
 
 }
 
-
 body {
     background: url('../images/clouds.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Piedra', sans-serif;
-    height: 1700px;
+    height: 900px;
 }
 
 .add_container {
     margin-top: 40px !important;
-    background-color: aliceblue;
-    height: 600px;
+    /* background-color: rgba(0,0, 0, 0.5); */
+    margin-left: 0;
+    height: 800px;
     /* width: 50vw; */
 }
 
 .addform {
-    background-color: aliceblue;
+    background-color: rgba(0,0, 0, 0.5);
 }
 
 .full_image {
@@ -61,6 +61,10 @@ body {
     font-size: 18px;
 }
 
+
+.input_row {
+    margin-left: 5px;
+}
 
 
 @media only screen and (max-width: 560px) {
