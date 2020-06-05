@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    
+    {% block title %}{% endblock %}
     <link rel="stylesheet" href="../static/css/main.css" />
     <link
       rel="stylesheet"
@@ -81,11 +82,11 @@
       <li><div class="divider"></div></li>
       <li><a class="subheader">Additional actions</a></li>
       <li><a href="{{url_for('add_book')}}"><i class="material-icons">book</i>Add a Book!</a></li>
-      <li><a href="#!"><i class="material-icons">computer</i>Add a Movie!</a></li>
+      <li><a href="{{url_for('add_movie')}}"><i class="material-icons">computer</i>Add a Movie!</a></li>
     </ul>
     <a href="#" data-target="slide-out" class="sidenav-trigger">
       <i id="menuicon" class="small material-icons navmenu white-text black"
-        >home</i
+        >menu</i
       >
     </a>
     <div class="row button-row">

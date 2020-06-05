@@ -21,14 +21,14 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Piedra', sans-serif;
-    height: 900px;
+    height: 1100px;
 }
 
 .add_container {
     margin-top: 40px !important;
     /* background-color: rgba(0,0, 0, 0.5); */
     margin-left: 0;
-    height: 800px;
+    height: 1100px;
     /* width: 50vw; */
 }
 

@@ -1,4 +1,9 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block title %}
+<title>Books</title>
+{% endblock %}
+
+{% block content %}
 <!-- <div class="content-container"> -->
 <div class="row">
   {% for book in books %}
@@ -10,16 +15,16 @@
         alt="Card image cap"
       />
       <div class="card-body">
-        <h5 class="card-title"><strong>{{ book.title}}</strong></h5>
+        <h5 class="card-title"><strong>{{ book.title.title()}}</strong></h5>
         <p class="card-text">
           {{book.first_comment}}
         </p>
       </div>
       <ul class="list-group list-group-flush">
       <div class="card-separate"></div>
-        <li class="list-group-item hoverable"><i class="material-icons left">person</i><strong> Author: </strong>{{book.author}} </li>
+        <li class="list-group-item hoverable"><i class="material-icons left">person</i><strong> Author: </strong>{{book.author.title()}} </li>
         <div class="card-separate"></div>
-        <li class="list-group-item hoverable"><i class="material-icons left">wb_sunny</i><strong>Category: </strong>{{book.category}} </li>
+        <li class="list-group-item hoverable"><i class="material-icons left">wb_sunny</i><strong>Category: </strong>{{book.category.capitalize()}} </li>
         <div class="card-separate"></div>
       </ul>
       <div class="card-body hoverable">

@@ -1,10 +1,10 @@
 {% extends 'add_layout.html' %} {% block content %}
 <div class="container add_container">
   <div class="row">
-    <h2 class="center-align">Add a movie!</h2>
+    <h2 class="center-align">Edit book!</h2>
     <form
       class="col s11 addform center-align"
-      action="{{ url_for('insert_movie') }}"
+      action="{{ url_for('update_book') }}"
       method="POST"
     >
       <div class="row input_row">
@@ -20,53 +20,60 @@
         </div>
         <div class="input-field col s6">
           <input
-            id="director"
-            name="director"
+            id="author"
+            name="author"
             type="text"
             class="validate"
             required
           />
-          <label for="director">Director</label>
+          <label for="title">Author</label>
         </div>
         <div class="input-field col s6">
-          <select id="category" name="category">
+          <select id="category" name="category" required>
             <option value="" disabled selected>Category</option>
-            {% for cat in movie %}
+            {% for cat in book %}
             <option value="{{cat.category}}">{{cat.category}}</option>
             {% endfor %}
           </select>
           <label>Category</label>
         </div>
-        <p>Provide a short description to show on the card on the main page:</p>
         <div class="input-field col s12">
           <textarea
-            id="small_description"
-            name="small_description"
+            id="description"
+            name="description"
             class="materialize-textarea"
             required
           ></textarea>
-          <label for="textarea1">Movie Short description</label>
+          <label for="textarea1">Book Description</label>
         </div>
-        <p>Provide a big description for people interested in what the movie is about:</p>
+        <p>Provide quotes from other readers and what they thought:</p>
+        <p></p>
         <div class="input-field col s12">
           <textarea
-            id="big_description"
-            name="big_description"
+            id="first_comment"
+            name="first_comment"
             class="materialize-textarea"
             required
           ></textarea>
-          <label for="textarea2">Movie long description</label>
+          <label for="textarea1">First Comment</label>
         </div>
-        <p>Please provide the time of the movie like this example; 1h56m</p>
         <div class="input-field col s12">
-          <input
-            id="runtime"
-            name="runtime"
-            type="text"
-            class="validate"
+          <textarea
+            id="second_comment"
+            name="second_comment"
+            class="materialize-textarea"
             required
-          />
-          <label for="runtime">runtime</label>
+          ></textarea>
+          <label for="textarea1">Second Comment</label>
+        </div>
+        <div class="input-field col s12">
+          <textarea
+            id="third_comment"
+            name="third_comment"
+            class="materialize-textarea"
+            required
+          ></textarea>
+          <label for="textarea1">Third Comment</label>
         </div>
         <p>
           Search the image on the internet, right click and select: "Copy
@@ -81,7 +88,7 @@
             class="validate"
             required
           />
-          <label for="img_url">Url to book image</label>
+          <label for="title">Url to book image</label>
         </div>
         <div class="input-field col s6">
           <input
@@ -89,9 +96,8 @@
             name="code"
             type="text"
             class="validate"
-            required
           />
-          <label for="code">Security Code</label>
+          <label for="title">Security Code</label>
         </div>
         <button
           class="btn waves-effect waves-light"
