@@ -37,6 +37,82 @@ def full_book(book_id):
     return render_template('full_book.html', book = this_book)
 
 
+'''Adding books | add_book is the html and form, insert_book the actual function that inserts'''
+
+@app.route('/addbook', methods=['GET', 'POST'])
+def add_book():
+    return render_template('addbook.html',
+    book=mongo.db.books.find(),
+    categories=mongo.db.categories.find())
+
+
+@app.route('/insert_book', methods=['GET','POST'])
+def insert_book():
+    book = mongo.db.books
+    new_book = request.form.get("title")
+    if book.count_documents({'title': new_book}, limit=1) == 0:
+        book_id = book.insert_one(request.form.to_dict()).inserted_id
+        ''''Returns the book that was just added'''
+        return redirect(url_for('full_book', book_id=book_id))
+    else:
+        flash(u'Book already exists', 'info')
+        return redirect(url_for('add_book'))
+
+
+
+'''Editing books | Edit_book is the html and form, update_book the actual function that updates'''
+
+@app.route('/edit_book/<book_id>')
+def edit_book(book_id):
+    the_book = mongo.db.books.find_one({'_id': ObjectId(book_id)})
+    return render_template('editbook.html', book=the_book,
+    categories = mongo.db.categories.find())
+
+
+@app.route('/update_book/<book_id>', methods=['POST'])
+def update_book(book_id):
+    book = mongo.db.books
+    updated_book = book.update({'_id': ObjectId(book_id)},
+    {
+        'title': request.form.get('title'),
+        'author': request.form.get('author'),
+        'category': request.form.get('category'),
+        'description': request.form.get('description'),
+        'first_comment': request.form.get('first_comment'),
+        'second_comment': request.form.get('second_comment'),
+        'third_comment': request.form.get('third_comment'),
+        'img_url': request.form.get('img_url'),
+        'code': request.form.get('code')
+    })
+    return redirect(url_for('full_book', book_id=book_id))
+
+@app.route('/checkBookForEdit/<book_id>', methods=['POST'])
+def checkBookForEdit(book_id):
+    inserted_code = request.form.get('insert_code')
+    the_book = mongo.db.books.find_one({'_id': ObjectId(book_id)})
+    print(request.form)
+    if inserted_code == the_book['code']:
+        return render_template('editbook.html', book=the_book)
+    else:
+        flash(u'Your code is invalid', 'error')
+        return render_template('full_book.html', book=the_book)
+
+@app.route('/checkBookAndDelete/<book_id>', methods=['POST'])
+def checkBookAndDelete(book_id):
+    inserted_code = request.form.get('insert_deletecode')
+    the_book = mongo.db.books.find_one({'_id': ObjectId(book_id)})
+    print(request.form)
+    print(inserted_code)
+    print(the_book['code'])
+    if inserted_code == the_book['code']:
+        mongo.db.books.find_one_and_delete(({'_id': ObjectId(book_id)}))
+        flash(u'Book has been Deleted', 'info')
+        return redirect(url_for('get_books'))
+    else:
+        flash(u'Your code is invalid', 'error')
+        return render_template('full_book.html', book=the_book)
+
+
 @app.route('/getmovies')
 def get_movies():
     return render_template('getmovies.html', movies=mongo.db.movies.find())
@@ -51,7 +127,8 @@ def full_movie(movie_id):
 @app.route('/addmovie', methods=['GET', 'POST'])
 def add_movie():
     return render_template('addmovie.html',
-    movie=mongo.db.movies.find())
+    movie=mongo.db.movies.find(),
+    categories=mongo.db.categories.find())
 
 
 @app.route('/insert_movie', methods=['GET','POST'])
@@ -61,59 +138,11 @@ def insert_movie():
     ''''Returns the movie that was just added'''
     return redirect(url_for('full_movie', movie_id=movie_id))
 
-
-'''Adding books | add_book is the html and form, insert_book the actual function that inserts'''
-
-@app.route('/addbook', methods=['GET', 'POST'])
-def add_book():
-    return render_template('addbook.html',
-    book=mongo.db.books.find())
-
-
-@app.route('/insert_book', methods=['GET','POST'])
-def insert_book():
-    book = mongo.db.books
-    new_book = request.form.get("title")
-    if book.count_documents({'title': new_book}, limit=1) == 0:
-        book_id = book.insert_one(request.form.to_dict()).inserted_id
-        ''''Returns the book that was just added'''
-        return redirect(url_for('full_book', book_id=book_id))
-    else:
-        flash('Book already exists')
-        return redirect(url_for('add_book'))
-
-
-
-'''Editing books | Edit_book is the html and form, update_book the actual function that updates'''
-
-@app.route('/edit_book/<book_id>')
-def edit_book(book_id):
-    the_book = mongo.db.books.find_one({'_id': ObjectId(book_id)})
-    return render_template('editbook.html', book=the_book)
-
-
-@app.route('/update_book/<book_id>', methods=['POST'])
-def update_book(book_id):
-    book = mongo.db.books
-    updated_book=book.update({'_id': ObjectId(book_id)},
-    {
-        'title': request.form.get('title'),
-        'author': request.form.get('author'),
-        'category': request.form.get('category'),
-        'description': request.form.get('description'),
-        'first_comment': request.form.get('first_comment'),
-        'second_comment': request.form.get('second_comment'),
-        'third_comment': request.form.get('third_comment'),
-        'img_url': request.form.get('img_url'),
-        'code': request.form.get('code')
-    })
-    return redirect(url_for('full_book', book=updated_book))
-
-
 @app.route('/edit_movie/<movie_id>', methods=['POST'])
 def edit_movie(movie_id):
-    the_movie = mongo.db.books.find_one({'_id': ObjectId(movie_id)})
-    return render_template('editmovie.html', movie=the_movie)
+    the_movie = mongo.db.movies.find_one({'_id': ObjectId(movie_id)})
+    return render_template('editmovie.html', movie=the_movie,
+    categories=mongo.db.categories.find())
 
 
 @app.route('/update_movie/<movie_id>', methods=['POST'])
@@ -130,47 +159,22 @@ def update_movie(movie_id):
         'img_url': request.form.get('img_url'),
         'code': request.form.get('code')
     })
-    return redirect(url_for('full_movie', movie=updated_movie))
-
-
-@app.route('/checkBookForEdit/<book_id>', methods=['POST'])
-def checkBookForEdit(book_id):
-    inserted_code = request.form.get('insert_code')
-    the_book = mongo.db.books.find_one({'_id': ObjectId(book_id)})
-    print(request.form)
-    if inserted_code == the_book['code']:
-        return render_template('editbook.html', book=the_book)
-    else:
-        flash('Your code is invalid')
-        return render_template('full_book.html', book=the_book)
+    return redirect(url_for('full_movie', movie_id=movie_id))
 
 
 @app.route('/checkMovieForEdit/<movie_id>', methods=['POST'])
 def checkMovieForEdit(movie_id):
-    inserted_code = request.form.get("insert_code")
+    inserted_code = request.form.get('insert_code')
     the_movie = mongo.db.movies.find_one({'_id': ObjectId(movie_id)})
     print(request.form)
-    if inserted_code == the_movie['code']:
-        return render_template('editmovie.html', movie=the_movie)
-    else:
-        flash('Your code is invalid')
-        return render_template('full_movie.html', movie=the_movie)
-
-
-@app.route('/checkBookAndDelete/<book_id>', methods=['POST'])
-def checkBookAndDelete(book_id):
-    inserted_code = request.form.get('insert_deletecode')
-    the_book = mongo.db.books.find_one({'_id': ObjectId(book_id)})
-    print(request.form)
     print(inserted_code)
-    print(the_book['code'])
-    if inserted_code == the_book['code']:
-        mongo.db.books.find_one_and_delete(({'_id': ObjectId(book_id)}))
-        flash('Book has been Deleted')
-        return redirect(url_for('get_books'))
+    print(the_movie['code'])
+    if inserted_code == the_movie['code']:
+        return render_template('editmovie.html', movie=the_movie,
+        categories=mongo.db.categories.find())
     else:
-        flash('Your code is invalid')
-        return render_template('full_book.html', book=the_book)
+        flash(u'Your code is invalid', 'error')
+        return render_template('full_movie.html', movie=the_movie)
 
 
 @app.route('/checkMovieAndDelete/<movie_id>', methods=['POST'])
@@ -180,10 +184,10 @@ def checkMovieAndDelete(movie_id):
     print(request.form)
     if inserted_code == the_movie['code']:
         mongo.db.movies.find_one_and_delete(({'_id': ObjectId(movie_id)}))
-        flash('Movie has been Deleted')
+        flash(u'Movie has been Deleted', 'info')
         return redirect(url_for('get_movies'))
     else:
-        flash('Your code is invalid')
+        flash(u'Your code is invalid', 'error')
         return render_template('full_movie.html', movie=the_movie)
 
 

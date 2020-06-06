@@ -66,6 +66,9 @@ body {
     margin-left: 5px;
 }
 
+.flashes ul li {
+    font-size: 30px;
+}
 
 @media only screen and (max-width: 560px) {
     body {
