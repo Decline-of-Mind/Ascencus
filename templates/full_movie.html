@@ -1,4 +1,8 @@
-{% extends 'add_layout.html'%} {% block content %}
+{% extends 'add_layout.html'%} 
+{% block title %}
+<title>Full movie</title>
+{% endblock %}
+{% block content %}
 
 <div>
   <div class="row">
@@ -36,6 +40,76 @@
       <p class="full_description">{{movie.big_description}}</p>
     </div>
   </div>
-</div>
+   <div class="row">
+      <div class="col 12">
+        <div class="center-align">
+          <button data-target="editmodal" class="btn modal-trigger">
+            Edit Book
+          </button>
+          <button data-target="deletemodal" class="btn modal-trigger">
+            Delete Book
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="editmodal" class="modal">
+      <div class="modal-content">
+        <form
+          action="{{url_for('checkMovieForEdit', movie_id=movie._id )}}"
+          method="POST"
+        >
+          <h4>Enter the code you've received to continue</h4>
+          <div class="input-field col s6">
+            <input
+              id="insert_code"
+              name="insert_code"
+              type="text"
+              class="validate"
+              required
+            />
+            <label for="code">Security Code</label>
+            <div class="modal-footer">
+              <button
+                type="submit"
+                name="action"
+                class="modal-close waves-effect waves-green btn-flat"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="deletemodal" class="modal">
+    <div class="modal-content">
+      <form
+        action="{{url_for('checkMovieAndDelete', movie_id=movie._id )}}"
+        method="POST"
+      >
+        <h4>Enter the code you've received to Delete the Movie</h4>
+        <div class="input-field col s6">
+          <input
+            id="insert_deletecode"
+            name="insert_deletecode"
+            type="text"
+            class="validate"
+            required
+          />
+          <label for="insert_deletecode">Security Code</label>
+          <div class="modal-footer">
+            <button
+              type="submit"
+              name="action"
+              class="modal-close waves-effect waves-green btn-flat"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 
 {% endblock %}

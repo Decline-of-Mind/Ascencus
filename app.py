@@ -1,11 +1,10 @@
 """All Imports"""
 import os
 '''Imports MONGO_URI key and SECRECT_KEY'''
-from os import path
-if path.exists('env.py'):
+if os.path.exists('env.py'):
     import env
 
-from flask import Flask, render_template, request, url_for, redirect, flash
+from flask import Flask, render_template, request, url_for, redirect, session, flash
 import pymongo
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -14,11 +13,9 @@ from bson.objectid import ObjectId
 app = Flask(__name__)
 
 """ Setting up variables needed for Database """
-MONGO_URI = os.environ.get('MONGO_URI')
-DBS_NAME = 'Ascend'
-
-app.config['MONGO_URI'] = MONGO_URI
-app.config['MONGO_DBS'] = DBS_NAME
+app.secret_key = os.environ.get('SECRET_KEY')
+app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
+app.config['MONGO_DBS'] = os.environ.get('DBS_NAME')
 
 mongo= PyMongo(app)
 
@@ -27,23 +24,28 @@ mongo= PyMongo(app)
 def index():
     return render_template('base.html', movies=mongo.db.movies.find())
 
-@app.route('/getmovies')
-def get_movies():
-    return render_template('getmovies.html', movies=mongo.db.movies.find())
 
 @app.route('/getbooks')
 def get_books():
     return render_template('getbooks.html', books=mongo.db.books.find())
 
-@app.route('/full_movie/<movie_id>')
+
+@app.route('/full_book/<book_id>', methods=['GET', 'POST'])
+def full_book(book_id):
+    print("hello")
+    this_book = mongo.db.books.find_one({'_id': ObjectId(book_id)})
+    return render_template('full_book.html', book = this_book)
+
+
+@app.route('/getmovies')
+def get_movies():
+    return render_template('getmovies.html', movies=mongo.db.movies.find())
+
+
+@app.route('/full_movie/<movie_id>' , methods=['GET', 'POST'])
 def full_movie(movie_id):
     this_movie = mongo.db.movies.find_one({'_id': ObjectId(movie_id)})
     return render_template('full_movie.html', movie = this_movie)
-
-@app.route('/full_book/<book_id>')
-def full_book(book_id):
-    this_book = mongo.db.books.find_one({'_id': ObjectId(book_id)})
-    return render_template('full_book.html', book = this_book)
 
 
 @app.route('/addmovie', methods=['GET', 'POST'])
@@ -51,33 +53,49 @@ def add_movie():
     return render_template('addmovie.html',
     movie=mongo.db.movies.find())
 
+
 @app.route('/insert_movie', methods=['GET','POST'])
 def insert_movie():
     movie = mongo.db.movies
     movie_id = movie.insert_one(request.form.to_dict()).inserted_id
+    ''''Returns the movie that was just added'''
     return redirect(url_for('full_movie', movie_id=movie_id))
 
+
+'''Adding books | add_book is the html and form, insert_book the actual function that inserts'''
 
 @app.route('/addbook', methods=['GET', 'POST'])
 def add_book():
     return render_template('addbook.html',
     book=mongo.db.books.find())
 
+
 @app.route('/insert_book', methods=['GET','POST'])
 def insert_book():
     book = mongo.db.books
-    book_id = book.insert_one(request.form.to_dict()).inserted_id
-    return redirect(url_for('full_book', book_id=book_id))
+    new_book = request.form.get("title")
+    if book.count_documents({'title': new_book}, limit=1) == 0:
+        book_id = book.insert_one(request.form.to_dict()).inserted_id
+        ''''Returns the book that was just added'''
+        return redirect(url_for('full_book', book_id=book_id))
+    else:
+        flash('Book already exists')
+        return redirect(url_for('add_book'))
+
+
+
+'''Editing books | Edit_book is the html and form, update_book the actual function that updates'''
 
 @app.route('/edit_book/<book_id>')
 def edit_book(book_id):
     the_book = mongo.db.books.find_one({'_id': ObjectId(book_id)})
     return render_template('editbook.html', book=the_book)
 
-@app.route('/update_book/<book_id>')
+
+@app.route('/update_book/<book_id>', methods=['POST'])
 def update_book(book_id):
     book = mongo.db.books
-    book.update({'_id': ObjectId(book_id)},
+    updated_book=book.update({'_id': ObjectId(book_id)},
     {
         'title': request.form.get('title'),
         'author': request.form.get('author'),
@@ -89,16 +107,19 @@ def update_book(book_id):
         'img_url': request.form.get('img_url'),
         'code': request.form.get('code')
     })
+    return redirect(url_for('full_book', book=updated_book))
 
-@app.route('/edit_movie/<movie_id>')
+
+@app.route('/edit_movie/<movie_id>', methods=['POST'])
 def edit_movie(movie_id):
     the_movie = mongo.db.books.find_one({'_id': ObjectId(movie_id)})
     return render_template('editmovie.html', movie=the_movie)
 
-@app.route('/update_movie/<movie_id>')
+
+@app.route('/update_movie/<movie_id>', methods=['POST'])
 def update_movie(movie_id):
-    movie = mongo.db.movie
-    movie.update({'_id': ObjectId(movie_id)},
+    movie = mongo.db.movies
+    updated_movie = movie.update({'_id': ObjectId(movie_id)},
     {
         'title': request.form.get('title'),
         'director': request.form.get('director'),
@@ -109,36 +130,61 @@ def update_movie(movie_id):
         'img_url': request.form.get('img_url'),
         'code': request.form.get('code')
     })
+    return redirect(url_for('full_movie', movie=updated_movie))
 
-@app.route('/full_book/<book_id>')
+
+@app.route('/checkBookForEdit/<book_id>', methods=['POST'])
 def checkBookForEdit(book_id):
     inserted_code = request.form.get('insert_code')
-    print(request.form)
     the_book = mongo.db.books.find_one({'_id': ObjectId(book_id)})
-    if inserted_code == the_book.code:
+    print(request.form)
+    if inserted_code == the_book['code']:
         return render_template('editbook.html', book=the_book)
     else:
         flash('Your code is invalid')
         return render_template('full_book.html', book=the_book)
 
 
-@app.route('/full_movie/<movie_id>', methods=['GET', 'POST'])
+@app.route('/checkMovieForEdit/<movie_id>', methods=['POST'])
 def checkMovieForEdit(movie_id):
     inserted_code = request.form.get("insert_code")
     the_movie = mongo.db.movies.find_one({'_id': ObjectId(movie_id)})
-    if inserted_code == the_movie.code:
+    print(request.form)
+    if inserted_code == the_movie['code']:
         return render_template('editmovie.html', movie=the_movie)
     else:
         flash('Your code is invalid')
         return render_template('full_movie.html', movie=the_movie)
 
 
+@app.route('/checkBookAndDelete/<book_id>', methods=['POST'])
+def checkBookAndDelete(book_id):
+    inserted_code = request.form.get('insert_deletecode')
+    the_book = mongo.db.books.find_one({'_id': ObjectId(book_id)})
+    print(request.form)
+    print(inserted_code)
+    print(the_book['code'])
+    if inserted_code == the_book['code']:
+        mongo.db.books.find_one_and_delete(({'_id': ObjectId(book_id)}))
+        flash('Book has been Deleted')
+        return redirect(url_for('get_books'))
+    else:
+        flash('Your code is invalid')
+        return render_template('full_book.html', book=the_book)
 
 
-
-
-
-
+@app.route('/checkMovieAndDelete/<movie_id>', methods=['POST'])
+def checkMovieAndDelete(movie_id):
+    inserted_code = request.form.get('insert_deletecode')
+    the_movie = mongo.db.movies.find_one({'_id': ObjectId(movie_id)})
+    print(request.form)
+    if inserted_code == the_movie['code']:
+        mongo.db.movies.find_one_and_delete(({'_id': ObjectId(movie_id)}))
+        flash('Movie has been Deleted')
+        return redirect(url_for('get_movies'))
+    else:
+        flash('Your code is invalid')
+        return render_template('full_movie.html', movie=the_movie)
 
 
 if __name__ == '__main__':

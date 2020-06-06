@@ -75,16 +75,46 @@
             />
             <label for="code">Security Code</label>
             <div class="modal-footer">
-              <a
+              <button
                 type="submit"
                 name="action"
                 class="modal-close waves-effect waves-green btn-flat"
-                >Submit</a
               >
+                Submit
+              </button>
             </div>
           </div>
         </form>
       </div>
+    </div>
+  </div>
+  <div id="deletemodal" class="modal">
+    <div class="modal-content">
+      <form
+        action="{{url_for('checkBookAndDelete', book_id=book._id )}}"
+        method="POST"
+      >
+        <h4>Enter the code you've received to Delete the Book</h4>
+        <div class="input-field col s6">
+          <input
+            id="insert_deletecode"
+            name="insert_deletecode"
+            type="text"
+            class="validate"
+            required
+          />
+          <label for="code">Security Code</label>
+          <div class="modal-footer">
+            <button
+              type="submit"
+              name="action"
+              class="modal-close waves-effect waves-green btn-flat"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

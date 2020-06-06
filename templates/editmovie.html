@@ -1,0 +1,105 @@
+{% extends 'add_layout.html' %} {% block content %}
+<div class="container add_container">
+  <div class="row">
+    <h2 class="center-align">Edit Movie!</h2>
+    <form
+      class="col s11 addform center-align"
+      action="{{ url_for('update_movie', movie_id=movie._id) }}"
+      method="POST"
+    >
+      <div class="row input_row">
+        <div class="input-field col s12">
+          <input
+            id="title"
+            name="title"
+            type="text"
+            class="validate"
+            required
+          />
+          <label for="title">Title</label>
+        </div>
+        <div class="input-field col s6">
+          <input
+            id="author"
+            name="author"
+            type="text"
+            class="validate"
+            required
+          />
+          <label for="title">Director</label>
+        </div>
+        <div class="input-field col s6">
+          <select id="category" name="category" required>
+            <option value="" disabled selected>Category</option>
+            {% for cat in book %}
+            <option value="{{cat.category}}">{{cat.category}}</option>
+            {% endfor %}
+          </select>
+          <label>Category</label>
+        </div>
+        <p>Provide a short description to show on the card on the main page:</p>
+        <div class="input-field col s12">
+          <textarea
+            id="small_description"
+            name="small_description"
+            class="materialize-textarea"
+            required
+          ></textarea>
+          <label for="textarea1">Movie Short description</label>
+        </div>
+        <p>
+          Provide a big description for people interested in what the movie is
+          about:
+        </p>
+        <div class="input-field col s12">
+          <textarea
+            id="big_description"
+            name="big_description"
+            class="materialize-textarea"
+            required
+          ></textarea>
+          <label for="textarea2">Movie long description</label>
+        </div>
+        <p>Please provide the time of the movie like this example; 1h56m</p>
+        <div class="input-field col s12">
+          <input
+            id="runtime"
+            name="runtime"
+            type="text"
+            class="validate"
+            required
+          />
+          <label for="runtime">runtime</label>
+        </div>
+        <p>
+          Search the image on the internet, right click and select: "Copy
+          address of image".
+        </p>
+        <p>REMEMBER YOUR CODE; you will need it to edit or delete.</p>
+        <div class="input-field col s6">
+          <input
+            id="img_url"
+            name="img_url"
+            type="url"
+            class="validate"
+            required
+          />
+          <label for="img_url">Url to book image</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="code" name="code" type="text" class="validate" required />
+          <label for="code">Security Code</label>
+        </div>
+        <button
+          class="btn waves-effect waves-light"
+          type="submit"
+          name="action"
+        >
+          Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

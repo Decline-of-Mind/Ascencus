@@ -4,7 +4,7 @@
     <h2 class="center-align">Edit book!</h2>
     <form
       class="col s11 addform center-align"
-      action="{{ url_for('update_book') }}"
+      action="{{ url_for('update_book', book_id=book._id) }}"
       method="POST"
     >
       <div class="row input_row">
