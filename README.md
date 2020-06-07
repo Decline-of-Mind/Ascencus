@@ -1,7 +1,7 @@
 # Ascension
 
 
-[Link to website]('https://ascensus-lg.herokuapp.com/getmovies')
+[Link to website](https://ascensus-lg.herokuapp.com/)
 
 ## Mission:
 
@@ -306,4 +306,4 @@ All taken from **[Unsplash](https://unsplash.com/)
 
 ## DISCLAIMER
 Please note the content and images on this website are for educational purposes only.
-[Link to website]('https://ascensus-lg.herokuapp.com/getmovies')
+[Link to website](https://ascensus-lg.herokuapp.com/)
