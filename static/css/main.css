@@ -73,7 +73,12 @@ body {
     
 }
 .card-body {
+    max-height: 250px;
     padding-left: 5px;
+}
+
+.body-card {
+    height: 200px;
 }
 
 .card-separate {
