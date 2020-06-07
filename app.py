@@ -21,8 +21,9 @@ mongo= PyMongo(app)
 
 
 @app.route('/')
+@app.route('/index')
 def index():
-    return render_template('base.html', movies=mongo.db.movies.find())
+    return render_template('index.html', movies=mongo.db.movies.find())
 
 
 @app.route('/getbooks')
@@ -59,7 +60,6 @@ def insert_book():
         return redirect(url_for('add_book'))
 
 
-
 '''Editing books | Edit_book is the html and form, update_book the actual function that updates'''
 
 @app.route('/edit_book/<book_id>')
@@ -85,6 +85,9 @@ def update_book(book_id):
         'code': request.form.get('code')
     })
     return redirect(url_for('full_book', book_id=book_id))
+
+
+'''Check whether the code inserted is equal to the database code'''
 
 @app.route('/checkBookForEdit/<book_id>', methods=['POST'])
 def checkBookForEdit(book_id):
@@ -113,6 +116,8 @@ def checkBookAndDelete(book_id):
         return render_template('full_book.html', book=the_book)
 
 
+"""MOVIES"""
+
 @app.route('/getmovies')
 def get_movies():
     return render_template('getmovies.html', movies=mongo.db.movies.find())
@@ -123,6 +128,8 @@ def full_movie(movie_id):
     this_movie = mongo.db.movies.find_one({'_id': ObjectId(movie_id)})
     return render_template('full_movie.html', movie = this_movie)
 
+
+'''Adding movies | add_movie is the html and form, insert_movie the actual function that inserts'''
 
 @app.route('/addmovie', methods=['GET', 'POST'])
 def add_movie():
@@ -137,6 +144,9 @@ def insert_movie():
     movie_id = movie.insert_one(request.form.to_dict()).inserted_id
     ''''Returns the movie that was just added'''
     return redirect(url_for('full_movie', movie_id=movie_id))
+
+
+'''Editing movies | Edit_movie is the html and form, update_movie the actual function that updates'''
 
 @app.route('/edit_movie/<movie_id>', methods=['POST'])
 def edit_movie(movie_id):
@@ -161,6 +171,7 @@ def update_movie(movie_id):
     })
     return redirect(url_for('full_movie', movie_id=movie_id))
 
+'''Check whether the code inserted is equal to the database code'''
 
 @app.route('/checkMovieForEdit/<movie_id>', methods=['POST'])
 def checkMovieForEdit(movie_id):
@@ -191,6 +202,13 @@ def checkMovieAndDelete(movie_id):
         return render_template('full_movie.html', movie=the_movie)
 
 
+
+
+
+
+
+
+'''Application technical options'''
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP', '0.0.0.0'),
     port=int(os.environ.get('PORT', '5000')),

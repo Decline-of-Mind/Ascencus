@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Piedra&display=swap|Exo:300,400,500,600,700');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Piedra&display=swap|Exo:300,400,500,600,700|Anton:400,500,600,700');
 
 /* Base.html */
 body {
@@ -56,7 +56,7 @@ body {
 /* CARDS FOR BOOKS AND MOVIES ON INDEX */
 .card {
     color:#0d47a1;
-    font-family: 'Piedra', sans-serif;
+    font-family: 'Anton', sans-serif;
     border-radius: 15px !important;
     background-color: #212121 !important;
 }
@@ -90,9 +90,19 @@ body {
 }
  /* CONTENT */
 
+.index-header{
+    font-family: 'Piedra', sans-serif;
+    color: white;
+}
 
-@media only screen and (max-width: 560px) {
-  .slides {
-      height: 20vh;
-  }
+.index-p {
+    font-family: 'Exo', sans-serif;
+    color: white;
+    font-weight: 600;
+}
+
+@media only screen and (min-width: 767px) {
+    .index-header {
+        margin-top: 200px;
+    }
 }
