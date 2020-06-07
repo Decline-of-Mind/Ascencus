@@ -141,10 +141,14 @@ def add_movie():
 @app.route('/insert_movie', methods=['GET','POST'])
 def insert_movie():
     movie = mongo.db.movies
-    movie_id = movie.insert_one(request.form.to_dict()).inserted_id
+    new_movie = request.form.get("title")
+    if movie.count_documents({'title': new_movie}, limit=1) == 0:
+        movie_id = movie.insert_one(request.form.to_dict()).inserted_id
     ''''Returns the movie that was just added'''
-    return redirect(url_for('full_movie', movie_id=movie_id))
-
+        return redirect(url_for('full_movie', movie_id=movie_id))
+    else:
+        flash(u'movie already exists', 'info')
+        return redirect(url_for('add_movie'))
 
 '''Editing movies | Edit_movie is the html and form, update_movie the actual function that updates'''
 
@@ -211,5 +215,4 @@ def checkMovieAndDelete(movie_id):
 '''Application technical options'''
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP', '0.0.0.0'),
-    port=int(os.environ.get('PORT', '5000')),
-    debug=True)
+    port=int(os.environ.get('PORT', '5000')))

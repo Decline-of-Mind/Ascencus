@@ -1,4 +1,11 @@
 {% extends 'add_layout.html' %} {% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+    <div class="center-align">
+      {% for category, message in messages %}
+      <h4 class="{{ category }}">{{ message }}</h4>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
 <div class="container add_container">
   <div class="row">
     <h2 class="center-align">Add a movie!</h2>
