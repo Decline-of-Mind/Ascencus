@@ -175,11 +175,13 @@ In the making of this project, loads of bugs were encountered. Mainly routing wa
 ### Adding a piece of content that already exists
 I was able to create the same movie/book time and time again. 
 Inside the insert_cotent code there is an if statement to counter that, but since it is case sensitive, you can make endless variations as long as one letter is different. This is not resolved yet, but will be by adding in a lower() function when inserting and ofcourse, capitalizing when showing.
+
 ---
 
 ### No route after updating
 After updating, the function wouldn't bring you back to the full_content page instead giving a jinja error
 The update function took the wrong argument. In the url_for(full_movie) had Updated_movie as an argument. Bson didn't take kindly to that. However, since the book_id or movie_id does not change after editing, movie_id=movie_id was valid. So it was replaced and the application hasn't shown errors anymore.
+
 ---
 
 ### Code inserted wasn't being accepted by the function
@@ -187,6 +189,7 @@ In order to delete or edit a code needs to be provided. It didnt matter if you d
 By printing out the information the function received from the HTML, I figured out an extra KeyValuePair was provided, namely:
 {"action" : ""}. After an embarrasingly long time, i realized the materialize button I used comes with a name="action" attribute to it.
 It would also post the value of the button... I deleted the name attribute and the issue was resolved.
+
 ---
 
 ## Deployment
