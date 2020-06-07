@@ -145,10 +145,11 @@ def insert_movie():
     if movie.count_documents({'title': new_movie}, limit=1) == 0:
         movie_id = movie.insert_one(request.form.to_dict()).inserted_id
     ''''Returns the movie that was just added'''
-        return redirect(url_for('full_movie', movie_id=movie_id))
+    return redirect(url_for('full_movie', movie_id=movie_id))
     else:
-        flash(u'movie already exists', 'info')
-        return redirect(url_for('add_movie'))
+    flash(u'movie already exists', 'info')
+    return redirect(url_for('add_movie'))
+
 
 '''Editing movies | Edit_movie is the html and form, update_movie the actual function that updates'''
 
